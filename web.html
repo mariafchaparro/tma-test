@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TMA - USDT Payment Test</title>
+    <title>USDT Payment Test - Web Version</title>
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Telegram WebApp SDK -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    
-    <!-- TON Connect UI -->
+    <!-- TON Connect UI (sin Telegram SDK) -->
     <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 </head>
 <body>
@@ -17,8 +14,15 @@
         <!-- Header -->
         <header>
             <h1>💰 USDT Payment Tests</h1>
-            <p class="subtitle">Telegram Mini App</p>
+            <p class="subtitle">Web Version (standalone)</p>
         </header>
+
+        <!-- Info Box -->
+        <section class="info-section">
+            <div class="info-box" style="background: #e3f2fd; border-color: #2196f3; color: #0d47a1;">
+                <p>ℹ️ <strong>Versión Web:</strong> Esta es la versión standalone que funciona fuera de Telegram. Conecta tu wallet TonKeeper o cualquier wallet compatible con TON Connect.</p>
+            </div>
+        </section>
 
         <!-- Wallet Connection Section -->
         <section class="wallet-section">
@@ -31,13 +35,13 @@
             </div>
         </section>
 
-        <!-- Payment Buttons Section -->
+        <!-- Payment Section -->
         <section class="payment-section">
             <div class="info-box">
                 <p>⚠️ <strong>Importante:</strong> Asegúrate de tener USDT y TON para gas fees en tu wallet.</p>
             </div>
 
-            <!-- Input for destination address -->
+            <!-- Destination Address -->
             <div class="input-group">
                 <label for="destination-address">Dirección de destino:</label>
                 <input 
@@ -48,7 +52,7 @@
                 />
             </div>
 
-            <!-- Input for amount -->
+            <!-- Amount -->
             <div class="input-group">
                 <label for="amount">Cantidad USDT:</label>
                 <input 
@@ -62,16 +66,11 @@
                 />
             </div>
 
-            <!-- Payment Buttons -->
+            <!-- Payment Button -->
             <div class="button-group">
-                <button id="pay-telegram-wallet" class="payment-btn primary" disabled>
-                    <span class="btn-icon">📱</span>
-                    <span class="btn-text">Pagar a Wallet Telegram</span>
-                </button>
-
-                <button id="pay-tonkeeper" class="payment-btn secondary" disabled>
+                <button id="send-usdt" class="payment-btn primary" disabled>
                     <span class="btn-icon">💎</span>
-                    <span class="btn-text">Pagar a TonKeeper</span>
+                    <span class="btn-text">Enviar USDT</span>
                 </button>
             </div>
         </section>
@@ -83,18 +82,18 @@
             </div>
         </section>
 
-        <!-- Instructions Section -->
+        <!-- Instructions -->
         <section class="instructions">
-            <details>
+            <details open>
                 <summary>ℹ️ Instrucciones de uso</summary>
                 <ol>
-                    <li>Conecta tu wallet usando el botón de arriba</li>
-                    <li>Ingresa la dirección de destino (wallet receptor)</li>
-                    <li>Ingresa la cantidad de USDT a enviar</li>
-                    <li>Presiona uno de los botones de pago</li>
+                    <li>Conecta tu wallet usando el botón TON Connect</li>
+                    <li>Ingresa la dirección de la wallet de destino</li>
+                    <li>Ingresa la cantidad de USDT que deseas enviar</li>
+                    <li>Presiona "Enviar USDT"</li>
                     <li>Confirma la transacción en tu wallet</li>
                 </ol>
-                <p><strong>Nota:</strong> Ambos botones funcionan igual, solo están separados para claridad conceptual.</p>
+                <p><strong>Diferencia con la TMA:</strong> Esta versión web no tiene acceso a los datos de Telegram, pero funciona exactamente igual para enviar transacciones.</p>
             </details>
         </section>
     </div>
@@ -105,6 +104,6 @@
         <p>Procesando transacción...</p>
     </div>
 
-    <script src="app.js"></script>
+    <script src="web-app.js"></script>
 </body>
 </html>

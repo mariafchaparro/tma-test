@@ -1,0 +1,396 @@
+/* ============================================
+   Styles for Telegram Mini App
+   ============================================ */
+
+/* ============= CSS VARIABLES ============= */
+:root {
+    /* Default colors (will be overridden by Telegram theme) */
+    --tg-bg-color: #ffffff;
+    --tg-text-color: #000000;
+    --tg-button-color: #3390ec;
+    --tg-button-text-color: #ffffff;
+    --tg-secondary-bg: #f4f4f5;
+    --tg-hint-color: #999999;
+    
+    /* App colors */
+    --primary-color: #0088cc;
+    --secondary-color: #5c9ce6;
+    --success-color: #4bb34b;
+    --warning-color: #f5a623;
+    --error-color: #e53935;
+    --border-color: #e4e4e7;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    
+    /* Border radius */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ============= RESET & BASE ============= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--tg-bg-color);
+    color: var(--tg-text-color);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* ============= CONTAINER ============= */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    min-height: 100vh;
+}
+
+/* ============= HEADER ============= */
+header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg) 0;
+}
+
+header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: var(--tg-hint-color);
+    font-size: 0.875rem;
+}
+
+/* ============= SECTIONS ============= */
+section {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ============= WALLET SECTION ============= */
+.wallet-section {
+    background: var(--tg-secondary-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.wallet-info {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.wallet-address {
+    font-size: 0.875rem;
+    word-break: break-all;
+}
+
+.wallet-address strong {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+}
+
+.wallet-address span {
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+}
+
+/* ============= PAYMENT SECTION ============= */
+.payment-section {
+    background: var(--tg-secondary-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.info-box {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.875rem;
+    color: #856404;
+}
+
+/* ============= INPUT GROUPS ============= */
+.input-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--tg-text-color);
+}
+
+.address-input,
+.amount-input {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: inherit;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.address-input {
+    font-family: monospace;
+    font-size: 0.875rem;
+}
+
+.address-input:focus,
+.amount-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(51, 144, 236, 0.1);
+}
+
+.amount-input {
+    font-weight: 600;
+}
+
+/* ============= BUTTONS ============= */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.payment-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    min-height: 56px;
+}
+
+.payment-btn.primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.payment-btn.secondary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.payment-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.payment-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.payment-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-icon {
+    font-size: 1.5rem;
+}
+
+.btn-text {
+    flex: 1;
+}
+
+/* ============= STATUS SECTION ============= */
+.status-section {
+    margin-top: var(--spacing-lg);
+}
+
+.status-box {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border-left: 4px solid;
+    font-size: 0.875rem;
+    margin-top: var(--spacing-md);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.status-box.success {
+    background: #d4edda;
+    border-color: var(--success-color);
+    color: #155724;
+}
+
+.status-box.error {
+    background: #f8d7da;
+    border-color: var(--error-color);
+    color: #721c24;
+}
+
+.status-box.warning {
+    background: #fff3cd;
+    border-color: var(--warning-color);
+    color: #856404;
+}
+
+.status-box.info {
+    background: #d1ecf1;
+    border-color: #17a2b8;
+    color: #0c5460;
+}
+
+.status-content {
+    white-space: pre-wrap;
+}
+
+/* ============= INSTRUCTIONS ============= */
+.instructions {
+    background: var(--tg-secondary-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+.instructions details {
+    cursor: pointer;
+}
+
+.instructions summary {
+    font-weight: 600;
+    padding: var(--spacing-sm);
+    user-select: none;
+    list-style: none;
+}
+
+.instructions summary::-webkit-details-marker {
+    display: none;
+}
+
+.instructions ol {
+    margin: var(--spacing-md) 0 var(--spacing-md) var(--spacing-lg);
+}
+
+.instructions li {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.6;
+}
+
+.instructions p {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+}
+
+/* ============= LOADING OVERLAY ============= */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.loading-overlay p {
+    color: white;
+    margin-top: var(--spacing-md);
+    font-weight: 600;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============= UTILITY CLASSES ============= */
+.hidden {
+    display: none !important;
+}
+
+/* ============= RESPONSIVE ============= */
+@media (max-width: 480px) {
+    .container {
+        padding: var(--spacing-sm);
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .payment-btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.9rem;
+    }
+}
+
+/* ============= TON CONNECT BUTTON OVERRIDE ============= */
+#ton-connect-button {
+    display: flex;
+    justify-content: center;
+}

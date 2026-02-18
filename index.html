@@ -50,13 +50,13 @@
 
             <!-- Input for amount -->
             <div class="input-group">
-                <label for="amount">Cantidad USDT:</label>
+                <label for="amount">Cantidad (TON o USDT según botón):</label>
                 <input 
                     type="number" 
                     id="amount" 
                     placeholder="1.0" 
                     step="0.1" 
-                    min="0.1"
+                    min="0.01"
                     value="1.0"
                     class="amount-input"
                 />
@@ -66,12 +66,12 @@
             <div class="button-group">
                 <button id="pay-telegram-wallet" class="payment-btn primary" disabled>
                     <span class="btn-icon">📱</span>
-                    <span class="btn-text">Pagar a Wallet Telegram</span>
+                    <span class="btn-text">Enviar USDT (Telegram Wallet)</span>
                 </button>
 
                 <button id="pay-tonkeeper" class="payment-btn secondary" disabled>
-                    <span class="btn-icon">💎</span>
-                    <span class="btn-text">Pagar a TonKeeper</span>
+                    <span class="btn-icon">📎</span>
+                    <span class="btn-text">Enviar TON (TonKeeper)</span>
                 </button>
             </div>
         </section>
@@ -105,6 +105,6 @@
         <p>Procesando transacción...</p>
     </div>
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>

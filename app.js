@@ -222,6 +222,8 @@ function buildJettonTransferBOC(destinationAddress, amount) {
 
 // ============= TON ADDRESS DECODER =============
 function decodeTONAddress(address) {
+    console.log('address', address);
+
     // 1. Limpiar la entrada (quitar espacios y saltos de línea)
     const clean = address.trim().replace(/-/g, '+').replace(/_/g, '/');
 

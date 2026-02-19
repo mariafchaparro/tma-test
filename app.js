@@ -221,10 +221,27 @@ function buildJettonTransferBOC(destinationAddress, amount) {
 }
 
 // ============= TON ADDRESS DECODER =============
+// ============= TON ADDRESS DECODER =============
 function decodeTONAddress(address) {
-    console.log('address', address);
+    // 0. Caso especial: Dirección RAW (0:hex...)
+    // TON Connect a veces devuelve la dirección en formato Raw
+    if (address.includes(':')) {
+        const parts = address.split(':');
+        if (parts.length === 2) {
+            const workchain = parseInt(parts[0], 10);
+            const hashHex = parts[1];
+            
+            // Convertir hex a Uint8Array
+            const hash = new Uint8Array(hashHex.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+            
+            if (hash.length !== 32) throw new Error('Longitud de hash incorrecta en dirección RAW');
+            
+            return { workchain, hash };
+        }
+    }
 
     // 1. Limpiar la entrada (quitar espacios y saltos de línea)
+    // Manejo de direcciones User-Friendly (EQ..., UQ...)
     const clean = address.trim().replace(/-/g, '+').replace(/_/g, '/');
 
     // 2. Añadir padding para que la longitud sea múltiplo de 4

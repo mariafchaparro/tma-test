@@ -93,22 +93,19 @@ function handleWalletDisconnected() {
 
 // ============= EVENT LISTENERS =============
 function setupEventListeners() {
-    document.getElementById('pay-telegram-wallet').addEventListener('click', () => handlePayment('usdt'));
-    document.getElementById('pay-tonkeeper').addEventListener('click', () => handlePayment('usdt'));
+    document.getElementById('pay-btn').addEventListener('click', () => handlePayment());
 }
 
 function enablePaymentButtons() {
-    document.getElementById('pay-telegram-wallet').disabled = false;
-    document.getElementById('pay-tonkeeper').disabled = false;
+    document.getElementById('pay-btn').disabled = false;
 }
 
 function disablePaymentButtons() {
-    document.getElementById('pay-telegram-wallet').disabled = true;
-    document.getElementById('pay-tonkeeper').disabled = true;
+    document.getElementById('pay-btn').disabled = true;
 }
 
 // ============= PAYMENT ROUTER =============
-async function handlePayment(type) {
+async function handlePayment() {
     const destinationAddress = document.getElementById('destination-address').value.trim();
     const amount = parseFloat(document.getElementById('amount').value);
 

@@ -222,33 +222,33 @@ function buildJettonTransferBOC(destinationAddress, amount) {
 
 // ============= TON ADDRESS DECODER =============
 function decodeTONAddress(address) {
-    try {
-        // Basic cleanup
-        let clean = address.trim().replace(/-/g, '+').replace(/_/g, '/');
+    // 1. Limpiar la entrada (quitar espacios y saltos de línea)
+    const clean = address.trim().replace(/-/g, '+').replace(/_/g, '/');
 
-        // Robust padding logic
-        while (clean.length % 4) {
-            clean += '=';
-        }
-
-        // Validate base64 characters
-        if (!/^[A-Za-z0-9+/=]+$/.test(clean)) {
-            throw new Error('Caracteres inválidos en la dirección');
-        }
-
-        const binaryString = atob(clean);
-        const bytes = Uint8Array.from(binaryString, c => c.charCodeAt(0));
-
-        if (bytes.length !== 36) throw new Error('Longitud de dirección inválida (' + bytes.length + ')');
-
-        const workchain = bytes[1] === 0xff ? -1 : bytes[1];
-        const hash = bytes.slice(2, 34);
-
-        return { workchain, hash };
-    } catch (error) {
-        console.error('Error decodificando dirección:', error);
-        throw new Error('Dirección de destino inválida: ' + error.message);
+    // 2. Añadir padding para que la longitud sea múltiplo de 4
+    let base64 = clean;
+    while (base64.length % 4) {
+        base64 += '=';
     }
+
+    // 3. Decodificar
+    let bytes;
+    try {
+        const binary = atob(base64);
+        bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+    } catch (e) {
+        throw new Error('Dirección TON inválida (no es base64 válido): ' + address);
+    }
+
+    // 4. Validar longitud (debe ser 36 bytes)
+    if (bytes.length !== 36) {
+        throw new Error('Dirección TON inválida (longitud incorrecta): ' + address);
+    }
+
+    const workchain = bytes[1] === 0xff ? -1 : bytes[1];
+    const hash = bytes.slice(2, 34);
+
+    return { workchain, hash };
 }
 
 // ============= BIT WRITER =============

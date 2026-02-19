@@ -222,41 +222,35 @@ function buildJettonTransferBOC(destinationAddress, amount) {
 
 // ============= TON ADDRESS DECODER =============
 function decodeTONAddress(address) {
-    // Limpiar espacios y saltos de línea
-    const address = input.trim();
+    console.log('address', address);
 
-    // 1️⃣ Intentar interpretar como raw (formato "workchain:hex")
-    const rawMatch = address.match(/^(-?\d+):([0-9a-fA-F]{64})$/);
-    if (rawMatch) {
-        const workchain = parseInt(rawMatch[1], 10);
-        const hex = rawMatch[2];
-        // Convertir hex a Uint8Array (32 bytes)
-        const hash = new Uint8Array(32);
-        for (let i = 0; i < 64; i += 2) {
-            hash[i / 2] = parseInt(hex.substr(i, 2), 16);
-        }
-        return { workchain, hash };
+    // 1. Limpiar la entrada (quitar espacios y saltos de línea)
+    const clean = address.trim().replace(/-/g, '+').replace(/_/g, '/');
+
+    // 2. Añadir padding para que la longitud sea múltiplo de 4
+    let base64 = clean;
+    while (base64.length % 4) {
+        base64 += '=';
     }
 
-    // 2️⃣ Si no es raw, asumir formato amigable (base64url)
+    // 3. Decodificar
+    let bytes;
     try {
-        // Convertir base64url a base64 estándar
-        let base64 = address.replace(/-/g, '+').replace(/_/g, '/');
-        // Añadir padding para que longitud sea múltiplo de 4
-        while (base64.length % 4) {
-            base64 += '=';
-        }
         const binary = atob(base64);
-        const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
-        if (bytes.length !== 36) {
-            throw new Error('Longitud incorrecta (deben ser 36 bytes)');
-        }
-        const workchain = bytes[1] === 0xff ? -1 : bytes[1];
-        const hash = bytes.slice(2, 34);
-        return { workchain, hash };
+        bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
     } catch (e) {
-        throw new Error('Dirección TON inválida (ni raw válido ni amigable): ' + address);
+        throw new Error('Dirección TON inválida (no es base64 válido): ' + address);
     }
+
+    // 4. Validar longitud (debe ser 36 bytes)
+    if (bytes.length !== 36) {
+        throw new Error('Dirección TON inválida (longitud incorrecta): ' + address);
+    }
+
+    const workchain = bytes[1] === 0xff ? -1 : bytes[1];
+    const hash = bytes.slice(2, 34);
+
+    return { workchain, hash };
 }
 
 // ============= BIT WRITER =============
